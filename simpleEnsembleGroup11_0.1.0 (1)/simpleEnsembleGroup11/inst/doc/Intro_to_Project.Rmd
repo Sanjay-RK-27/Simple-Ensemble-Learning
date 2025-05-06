@@ -1,0 +1,62 @@
+---
+title: "Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simpleEnsembleGroup11)
+```
+
+
+# **Introduction**
+
+`simpleEnsembleGroup11` is an R package designed for the analysis of both binary and continuous response variables using a variety of regression techniques and machine learning models. This package efficiently handles scenarios where the number of predictors is much larger than the number of observations and includes advanced methods such as bagging and ensemble learning to improve model accuracy and robustness.
+
+## Key functionalities of the package include:
+-- Prescreening for the top "K" most informative predictors, particularly when the number of predictors is much larger than the sample size.    
+-- Implementing bagging to improve robustness, where the package will perform sampling with replacement and return the average of these models.    
+-- Providing a "naive" variable importance score based on the selection frequency of each variable during the bagging process.    
+-- Supporting ensemble learning, allowing users to fit multiple models on the same dataset and combine the results.  
+
+## Installation
+To install the simpleEnsembleGroupX package, download the .tar.gz file and use the following R command:
+```{r}
+install.packages("C:/Users/vredrouthu/Downloads/simpleEnsembleGroup11_0.1.0.tar.gz", repos = NULL, type = "source")
+
+```
+Ensure that the packages are also installed as simpleEnsembleGroup11 relies on these for certain functionalities.
+
+# Example Usage
+## Loading the package
+```{r}
+library(simpleEnsembleGroup11)
+```
+
+
+# Getting Help
+Each function in the package comes with detailed help accessible via the R help system:
+```{}
+?linear_regression
+?logistic_regression
+?ridge_regression
+?lasso_regression
+?bagging
+?elastic_net
+?random_forest
+?prescreen_predictors
+
+```
+
+
+

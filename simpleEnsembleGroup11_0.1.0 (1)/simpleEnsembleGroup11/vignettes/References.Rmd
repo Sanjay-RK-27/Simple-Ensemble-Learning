@@ -1,0 +1,53 @@
+---
+title: "References"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{References}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simpleEnsembleGroup11)
+```
+
+
+```{r}
+citation("glmnet")
+```
+1. Friedman, J., Hastie, T., & Tibshirani, R. (2010). *Regularization Paths for Generalized Linear Models via Coordinate Descent*. Journal of Statistical Software, 33(1), 1-22.  
+2. https://glmnet.stanford.edu/articles/glmnet.html
+
+```{r}
+citation("randomForest")
+```
+3. Liaw, A., & Wiener, M. (2002). *Classification and Regression by randomForest*. R News, 2(3), 18-22.
+4. Wright, M. N., & Ziegler, A. (2017). *ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R*. Journal of Statistical Software, 77(1), 1-17.
+
+### Ensemble Learning
+
+5. Gashler, M., & Martinez, T. (2017). *Decision Tree Ensemble: Small Heterogeneous Is Better Than Large Homogeneous*. In Seventh International Conference on Learning Representations (ICLR). 
+6. Guyon, I., & Elisseeff, A. (2003). *An introduction to variable and feature selection*. Journal of Machine Learning Research, 3, 1157-1182.
+7. Dietterich, T. G. (2000). *Ensemble methods in machine learning. In International workshop on multiple classifier systems (pp. 1-15)*. Springer, Berlin, Heidelberg.
+
+## Building and Documenting R Packages
+
+### Package development
+
+8. Wickham, H., & Bryan, J. (2019). *R Packages: Organize, Test, Document, and Share Your Code, 2nd Edition*. O'Reilly Media.
+9. https://r-pkgs.org/description.html
+10. https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html
+
+### Documentation and Vignettes
+
+11. https://kbroman.org/pkg_primer/pages/depends.html
+12. Xie, Y., Allaire, J.J., & Grolemund, G. (2018). *R Markdown: The Definitive Guide*. Chapman and Hall/CRC.
+
+

@@ -1,0 +1,97 @@
+---
+title: "Overview of the models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Overview of the models}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simpleEnsembleGroup11)
+```
+#**Model Overview**  
+
+## 1 Linear Regression
+Linear Regression is used when the response variable y is continuous. It models the relationship between the response and one or more predictors by fitting a linear equation to observed data.
+
+## Example
+```{}
+# Fit a linear regression model
+model <- linear_regression(X, y, bagging = TRUE, prescreen = FALSE, alpha = 0, lambda = 0.1)
+```
+
+
+## 2 Logistic Regression 
+Logistic Regression is employed when y is binary (0 or 1). It models the probability that y belongs to a particular category.
+
+## Example
+```{}
+# Fit a logistic regression model
+model <- logistic_regression(X, y, bagging = TRUE, prescreen = FALSE, alpha = 0.5, lambda = 0.1)
+```
+
+
+## 3 Ridge Regression
+Ridge Regression is a type of regularized linear regression that includes an L2 penalty. This penalty term is the square of the magnitude of coefficients. Both continuous and binary y values can be handled using Ridge Regression. It helps in reducing model complexity and preventing over-fitting which may result from simple linear models.
+
+## Example
+```{}
+# Fit a ridge regression model
+model <- ridge_regression(X, y, bagging = TRUE, prescreen = FALSE, lambda = 0.1)
+```
+
+## 4 Lasso Regression
+Lasso Regression is another type of linear regression that includes an L1 penalty on the sum of the absolute values of the coefficients. Like Ridge Regression, Lasso can handle both types of response variables: continuous and binary. It has the additional property of performing variable selection by forcing some coefficients to be exactly zero when the tuning parameter is sufficiently large.
+
+## Example
+```{}
+# Fit a lasso regression model
+model <- lasso_regression(X, y, bagging = TRUE, prescreen = FALSE, lambda = 0.1)
+```
+
+
+## 5 Elastic Net
+Elastic Net is a middle ground between Ridge and Lasso Regression. It combines the penalties of Ridge and Lasso, making it suitable for cases where there are correlations among predictors. This model is robust to various types of data and can handle both binary and continuous y.
+
+## Example
+```{}
+# Fit an elastic net model
+model <- elastic_net(X, y, bagging = TRUE, prescreen = FALSE, alpha = 0.5, lambda = 0.1)
+```
+
+
+## 6 Random Forest
+Random Forest is an ensemble learning method for classification and regression that operates by constructing a multitude of decision trees at training time. For classification tasks with a binary y, it predicts the mode of the classes of the individual trees. For regression tasks with a continuous y, it averages the predictions of the trees. Random Forest can handle a large number of predictors effectively and is robust against overfitting.
+
+-- Random Forest does not have a simple equation like the regression models, as it builds multiple decision trees and aggregates their predictions.
+## Example
+```{}
+# Fit a Random Forest model
+model <- random_forest(X, y, is_binary = TRUE, prescreen = FALSE, ntree = 1000)
+```
+
+## Model robustness and variable importance
+
+To enhance model robustness, your package should offer options for bagging, which involves fitting models multiple times on bootstrapped samples and averaging the results. Additionally, implement a feature to evaluate variable importance based on their selection frequency during the bagging process. This not only aids in understanding model behavior but also in identifying key predictors.
+
+## Example
+```{}
+# Performing bagging
+bagged_model <- bagging(X, y, model_type = "linear", R = 100)
+
+#calculating Predictions:
+predictions <- bagged_model$predicted_values
+# Calculating naive variable importance
+importance_scores <- bagged_model$variable_importance
+```
+
+
+

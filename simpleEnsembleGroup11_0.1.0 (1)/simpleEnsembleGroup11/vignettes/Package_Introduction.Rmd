@@ -1,0 +1,64 @@
+---
+title: "Package Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simpleEnsembleGroup11)
+```
+
+
+# **Using Direct Matrix Input**
+For users who prefer to directly input data in matrix form or have pre-processed data available as matrices and vectors in R, the simpleEnsembleGroupX package accommodates this use case seamlessly. Below are the guidelines and an example demonstrating how to proceed with matrix and vector inputs.
+
+## Example: Using Matrix and Vector Inputs
+Assume you have your predictors stored in a matrix `X` and your response variable in a vector `y`. Here’s how you can directly use these in the package functions without loading from an external file:
+```{}
+# Example matrix of predictors (each column represents a predictor)
+X <- matrix(rnorm(100), nrow=20)  # Simulating a matrix with 20 observations and 5 predictors
+
+# Example vector for response variable
+y <- rbinom(20, 1, 0.5)  # Simulating a binary response variable for 20 observations
+
+# Fit a logistic regression model using the direct matrix and vector
+fit <- logistic_regression(X, y)
+
+```
+
+## Guidelines for Data Input
+When using direct matrix and vector inputs, ensure the following:
+
+-- Matrix X: Should be a numeric matrix where each column corresponds to a predictor and each row to an observation.  
+-- Vector y: Must be a numeric or binary vector with length equal to the number of rows in X.  
+
+## Verifying Data Integrity
+Before proceeding with any model fitting, it's good practice to verify the integrity and structure of your data:
+```{}
+# Verify that X is a matrix and y is a vector
+if (!is.matrix(X)) {
+  stop("Error: X should be a matrix.")
+}
+if (!is.vector(y) || length(y) != nrow(X)) {
+  stop("Error: y should be a vector with a length equal to the number of rows in X.")
+}
+
+# Check for missing values
+if (any(is.na(X)) || any(is.na(y))) {
+  stop("Error: Data contains NA values. Please clean your data before modeling.")
+}
+
+```
+
+## Additional Considerations
+Ensure that the matrix and vector do not contain any NA values or categorical variables that need encoding. If your predictors include categorical data, convert these into dummy variables or factorize them as appropriate before including them in the matrix X.

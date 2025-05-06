@@ -1,0 +1,56 @@
+---
+title: "Advanced Techniques"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Techniques}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simpleEnsembleGroup11)
+```
+
+
+## Bagging (Bootstrap Aggregating)
+
+Bagging is an ensemble technique that improves the stability and accuracy of machine learning algorithms. It involves creating multiple versions of a predictor model by resampling data with replacement and then aggregating the models to form a final prediction. Bagging can reduce variance and help avoid overfitting.
+
+The `bagging` function performs bootstrap aggregation (bagging) for various regression and classification models. It generates `R` bootstrap samples, fits the specified model type on each sample, and makes predictions on the original data. For classification, the final prediction is the majority vote across models. For regression, it's the average of predicted values. Variable importance is calculated as the proportion of times a variable is selected across models. This ensemble approach reduces variance and improves model stability.
+
+```{}
+# Implementing bagging for logistic regression
+bagged_fit <- bagging(X, y, model_type = "logistic", R = 100)  # R is the number of bootstrap samples
+
+```
+## Prescreening Predictors
+
+Prescreening involves selecting the most informative predictors before fitting the model, particularly useful when dealing with a large number of predictors (high-dimensional data). This approach can enhance model performance by reducing noise and computation time, focusing on the most relevant features.
+
+The prescreen_predictors function employs a feature selection approach based on the variable importance scores from a Random Forest model. It first fits a Random Forest model to the data, then ranks the predictors based on their importance scores, and finally selects the top K most important predictors. This correlation-based screening method efficiently reduces the dimensionality of the feature space, potentially improving the performance and interpretability of subsequent regression models.
+
+```{}
+# Prescreening top 10 informative predictors
+selected_X <- prescreen_predictors(X, y, top_k = 10)
+
+```
+
+## Ensemble Learning
+
+Ensemble learning combines multiple models to improve the overall predictive performance compared to a single model. It leverages the strengths of various models to achieve higher accuracy, often through methods like averaging, weighted averaging, or voting mechanisms.
+
+In this package we implemented the weighted average method to compute the combined final predicted results.
+
+The weighted average ensemble is an extension of the voting ensemble, where each model's contribution is proportional to its performance. Weights are assigned to each model, summing to 1, and the final prediction is the weighted sum of individual model predictions. The weights are typically estimated using the training or validation data, balancing the models' strengths. This approach can outperform simple voting when there are significant differences in model performance, but care must be taken to avoid overfitting when estimating the weights.
+```{}
+# Combining logistic regression and random forest for better prediction
+ensemble_results <- ensemble(X, y, model_types = c("logistic", "randomForest"),weights = c(0.3,0.3,0.4))
+```
+

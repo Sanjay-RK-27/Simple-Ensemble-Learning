@@ -1,0 +1,26 @@
+---
+title: " Introduction to Simple Ensemble "
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ Introduction to Simple Ensemble }
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simpleEnsembleGroup11)
+```
+
+---
+simpleEnsembleGroup11
+---
+
+# Introduction
+The `simpleEnsembleGroup11` package is an R package that provides a set of functions for performing various regression and classification models, including linear, logistic, ridge, lasso, elastic net, and another machine learning model (SVM, random forest, or boosted trees). The package also includes options for pre-screening predictors, performing bagging, and ensemble learning.
